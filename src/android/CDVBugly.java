@@ -7,6 +7,7 @@ import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 
+import android.content.Context;
 import android.util.Log;
 import android.webkit.WebView;
 import org.json.JSONArray;
@@ -125,7 +126,8 @@ public class CDVBugly extends CordovaPlugin {
      private boolean setUserID(CordovaArgs args, CallbackContext callbackContext) {
         try {
             int id = args.getInt(0);
-            CrashReport.setUserID(this.cordova.getActivity().getApplicationContext(), id);
+            Context context = this.cordova.getActivity().getApplicationContext();
+            CrashReport.setUserId(context, String.valueOf(id));
         } catch (JSONException e) {
             callbackContext.error(ERROR_INVALID_PARAMETERS);
             return true;
